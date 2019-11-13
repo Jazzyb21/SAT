@@ -171,6 +171,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\ScheduledClassesController.cs" />
+    <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -192,6 +194,7 @@
     <Content Include="Content\css\bootstrap\bootstrap-reboot.css" />
     <Content Include="Content\css\css\bootstrap-reboot.css" />
     <Content Include="Content\css\css\mixins\_text-hide.css" />
+    <Content Include="Content\css\CustomStyles.css" />
     <Content Include="Content\css\flaticon.css" />
     <Content Include="Content\css\icomoon.css" />
     <Content Include="Content\css\ionicons.min.css" />
@@ -2264,6 +2267,22 @@
     <Content Include="Content\fonts\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.woff2" />
     <None Include="packages.config" />
     <Content Include="Scripts\js\.DS_Store" />
+    <Content Include="Views\Students\Create.cshtml" />
+    <Content Include="Views\Students\Delete.cshtml" />
+    <Content Include="Views\Students\Details.cshtml" />
+    <Content Include="Views\Students\Edit.cshtml" />
+    <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\ScheduledClasses\Create.cshtml" />
+    <Content Include="Views\ScheduledClasses\Delete.cshtml" />
+    <Content Include="Views\ScheduledClasses\Details.cshtml" />
+    <Content Include="Views\ScheduledClasses\Edit.cshtml" />
+    <Content Include="Views\ScheduledClasses\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SAT.DATA.EF\SAT.DATA.EF.csproj">
+      <Project>{68ce21b5-d3d4-4cff-b67c-9feb5792e353}</Project>
+      <Name>SAT.DATA.EF</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

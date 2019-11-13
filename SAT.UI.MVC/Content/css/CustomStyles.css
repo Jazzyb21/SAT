@@ -1,0 +1,53 @@
+﻿body {
+}
+
+.dropdown-memu{
+    margin-top: 0;
+}
+
+/*******Student Control Views**********/
+
+/*Details*/
+#stuDetails{
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+    border: solid 1px black;
+    padding: 1em;
+}
+#stuHeader {
+    text-align:center;
+    font-size: 3em;
+    font-weight: bolder;
+}
+
+#stuPic {
+    float: left;
+    width: 40% ;
+}
+
+#stuContentRight{
+    float: right;
+    width: 60%;
+}
+
+#stuFooterLeft{
+    float: left;
+
+}
+
+#stuFooterRight{
+    float: right;
+}
+
+#detailsList{
+    list-style: none;
+}
+
+/*Edit*/
+
+#stuEditContent label {
+    text-align: right;
+    vertical-align: middle;
+
+}

@@ -153,11 +153,18 @@ namespace SAT.UI.MVC.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    ViewBag.Link = callbackUrl;
-                    return View("DisplayEmail");
+                    //sets default scheduler
+                    UserManager.AddToRole(user.Id, "scheduler");
+
+
+                    #region REMOVED EMAIL CONFIRMATION DEMO STUFF
+                    //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    //ViewBag.Link = callbackUrl;
+                    //return View("DisplayEmail");
+                    #endregion
+
                 }
                 AddErrors(result);
             }
@@ -166,10 +173,10 @@ namespace SAT.UI.MVC.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ConfirmEmail
-        [HttpGet]
-        [AllowAnonymous]
+
+        //GET: /Account/ConfirmEmail
+       [HttpGet]
+       [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)

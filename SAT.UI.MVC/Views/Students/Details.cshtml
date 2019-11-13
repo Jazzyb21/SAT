@@ -1,0 +1,55 @@
+﻿@model SAT.DATA.EF.Student
+
+@{
+    ViewBag.Title = Model.FullName + " Details";
+}
+
+<div class="container" id="stuDetails">
+    <div id="stuHeader"><h2>@ViewBag.Title</h2></div>
+    <div id="stuPic">
+        <image class="img-thumbnail img-fluid"src="~/Content/images/@Html.DisplayFor(model => model.PhotoUrl)"></image>
+    </div>
+    <div id="stuContentRight">
+        <ul id="detailsList">
+            <li>
+                @Html.DisplayNameFor(model => model.Major): @Html.DisplayFor(model => model.Major)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.Address): @Html.DisplayFor(model => model.Address)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.City): @Html.DisplayFor(model => model.City)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.State): @Html.DisplayFor(model => model.State)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.ZipCode): @Html.DisplayFor(model => model.ZipCode)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.Phone): @Html.DisplayFor(model => model.Phone)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.Email): @Html.DisplayFor(model => model.Email)
+            </li>
+            <li>
+                @Html.DisplayFor(model => model.StudentStatus.SSName): @Html.DisplayFor(model => model.StudentStatus.SSDescription)
+            </li>
+        </ul>
+    </div>
+    <div class="clearfix"></div>
+    <br/>
+    @*<div id="stuContentLower"></div>*@
+    <div id="stuFooterLeft">
+        @Html.ActionLink("Back to Students", "Index", null, new { @class = "btn btn-success" })
+
+    </div>
+    <div id="stuFooterRight">
+        @if (User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.StudentId }, new { @class = "btn btn-danger" })
+        }
+
+    </div>
+    <div class="clearfix"></div>
+</div>

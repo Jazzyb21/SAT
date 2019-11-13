@@ -153,14 +153,22 @@ namespace SAT.DATA.EF
 
         [StringLength(60, ErrorMessage = "* Must be 60 or less characters")]
         [Display(Name = "Image")]
-        [DisplayFormat(NullDisplayText = "N/A")]
+        [DisplayFormat(NullDisplayText = "person_1.jpg")]
         public string PhotoUrl { get; set; }
 
         public int SSID { get; set; }
 
     }
     [MetadataType(typeof(StudentMetadata))]
-    public partial class Student { }
+    public partial class Student
+    {
+        [Display(Name = "Name")]
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; }
+        }
+
+    }
     #endregion
 
     #region StudentStatus

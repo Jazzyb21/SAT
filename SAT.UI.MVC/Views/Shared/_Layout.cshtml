@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="~/Content/css/flaticon.css">
     <link rel="stylesheet" href="~/Content/css/icomoon.css">
     <link rel="stylesheet" href="~/Content/css/style.css">
+    <link href="~/Content/css/CustomStyles.css" rel="stylesheet" />
     @RenderSection("styles", required: false)
 </head>
 <body>
@@ -36,12 +37,47 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a href="@Url.Action("Index", "Home")" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Students</a></li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item"><a href="@Url.Action("Index", "Students")" class="nav-link">Students</a></li>
+                    }
                     <li class="nav-item"><a href="#" class="nav-link">Courses</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Scheduled</a></li>
                     <li class="nav-item"><a href="@Url.Action("Contact", "Home")" class="nav-link">Contact</a></li>
-                    @Html.Partial("_Loginpartial")
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" title="Manage" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                            @using Microsoft.AspNet.Identity
+                            @if (Request.IsAuthenticated)
+                            {
+
+                                @:Hello, @User.Identity.GetUserName()!
+                            }
+                            else
+                            {
+                                @:Login
+                            }
+
+
+
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            @Html.Partial("_Loginpartial")
+                        </div>
+
+                    </li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item dropdown">
+                            <span class="nav-link dropdown-toggle ml-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Functions</span>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                <a class="dropdown-item" href="@Url.Action("Index", "UsersAdmin")">Users Admin</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "RolesAdmin")">Roles Admin</a>
+                            </div>
+                        </li>
+                    }
                 </ul>
+
             </div>
         </div>
     </nav>
@@ -49,7 +85,7 @@
     <div class="container">
         @RenderBody()
     </div>
-   
+
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
         <div class="container-fluid px-md-5 px-3">
