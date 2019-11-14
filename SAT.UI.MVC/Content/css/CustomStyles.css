@@ -1,4 +1,5 @@
 ﻿body {
+    min-height: 30em; 
 }
 
 .dropdown-memu{
@@ -64,4 +65,27 @@
 #scContent{
     text-align: center;
 
+}
+
+/*Contact Page*/
+
+.contactPage {
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+    min-height: 28em;
+    border: solid 1px black;
+    padding: 1em;
+
+}
+
+/*email confrimation*/
+#emailConfirmationContainer {
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+    min-height: 28em;
+    border: solid 1px black;
+    padding: 1em;
+    text-align: left;
 }
