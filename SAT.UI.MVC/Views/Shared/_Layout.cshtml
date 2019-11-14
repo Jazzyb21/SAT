@@ -51,7 +51,7 @@
                     }
                     @if (User.IsInRole("Admin"))
                     {
-                        <li class="nav-item"><a href="@Url.Action("Index", "StudentStatusController")" class="nav-link">Student Statuses</a></li>
+                        <li class="nav-item"><a href="@Url.Action("Index", "StudentStatus")" class="nav-link">Student Statuses</a></li>
                     }
                     @if (Request.IsAuthenticated)
                     {
@@ -97,7 +97,7 @@
         </div>
     </nav>
     <!-- END nav -->
-    <div class="container">
+    <div class="container" id="main">
         @RenderBody()
     </div>
 

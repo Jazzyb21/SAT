@@ -40,7 +40,7 @@ namespace SAT.UI.MVC.Controllers
         }
 
         // GET: ScheduledClasses/Create
-        [Authorize(Roles ="Admin")]
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName");
@@ -53,7 +53,7 @@ namespace SAT.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles ="Admin")]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ScheduledClassId,CourseId,StartDate,EndDate,InstructorName,Location,SCSID")] ScheduledClass scheduledClass)
         {
             if (ModelState.IsValid)
@@ -69,7 +69,7 @@ namespace SAT.UI.MVC.Controllers
         }
 
         // GET: ScheduledClasses/Edit/5
-        [Authorize(Roles ="Admin")]
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -91,7 +91,7 @@ namespace SAT.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles ="Admin")]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ScheduledClassId,CourseId,StartDate,EndDate,InstructorName,Location,SCSID")] ScheduledClass scheduledClass)
         {
             if (ModelState.IsValid)
@@ -107,7 +107,7 @@ namespace SAT.UI.MVC.Controllers
 
         // GET: ScheduledClasses/Delete/5
         [Authorize(Roles ="Admin")]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, int statusId)
         {
             if (id == null)
             {
@@ -118,17 +118,22 @@ namespace SAT.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(scheduledClass);
+            db.ScheduledClasses.Find(id).SCSID = statusId;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+            //return View(scheduledClass);
         }
 
         // POST: ScheduledClasses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles ="Admin")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, int statusId)
         {
             ScheduledClass scheduledClass = db.ScheduledClasses.Find(id);
-            db.ScheduledClasses.Remove(scheduledClass);
+            db.ScheduledClasses.Find(id).SCSID = statusId;
+            //db.ScheduledClasses.Remove(scheduledClass);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

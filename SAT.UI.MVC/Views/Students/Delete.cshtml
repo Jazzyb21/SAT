@@ -50,10 +50,9 @@
 
         </div>
         <div id="stuFooterRight">
-            @if (User.IsInRole("Admin"))
-            {
-                @Html.ActionLink("Delete", "Delete", new { id = Model.StudentId }, new { @class = "btn btn-danger" })
-            }
+                <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" /> 
+        </div>
 
         </div>
         <div class="clearfix"></div>

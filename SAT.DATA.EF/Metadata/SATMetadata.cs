@@ -54,6 +54,7 @@ namespace SAT.DATA.EF
         [Required]
         [Display(Name = "Enrollment Date")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public System.DateTime EnrollmentDate { get; set; }
 
     }
@@ -63,7 +64,7 @@ namespace SAT.DATA.EF
         [Display(Name = "Course")]
         public string CourseAndDate
         {
-            get { return ScheduledClass.Cours.CourseName + " ( " + ScheduledClass.StartDate + " )"; }
+            get { return ScheduledClass.Cours.CourseName + $" ( {ScheduledClass.StartDate:d} )"; }
 
         }
     }
@@ -78,16 +79,17 @@ namespace SAT.DATA.EF
         [Required]
         [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public System.DateTime StartDate { get; set; }
 
         [Required]
-        [Display(Name = "End Data")]
+        [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         public System.DateTime EndDate { get; set; }
 
         [Required]
-        [StringLength(40, ErrorMessage = "* Must be 250 or less characters")]
-        [Display(Name = "Instructor Name")]
+        [StringLength(40, ErrorMessage = "* Must be 40 or less characters")]
+        [Display(Name = "Instructor")]
         public string InstructorName { get; set; }
 
         [Required]
@@ -103,7 +105,7 @@ namespace SAT.DATA.EF
         [Display(Name = "Course")]
         public string CourseAndDate
         {
-            get { return Cours.CourseName + " ( " + StartDate + " )"; }
+            get { return Cours.CourseName + $" ( {StartDate:d} )"; }
 
         }
     }
@@ -200,6 +202,7 @@ namespace SAT.DATA.EF
         public string SSName { get; set; }
 
         [StringLength(250, ErrorMessage = "The value must be 250 characters or less")]
+        [Display(Name = "Description")]
         public string SSDescription { get; set; }
 
     }

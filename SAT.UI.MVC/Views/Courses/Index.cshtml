@@ -74,8 +74,16 @@
                 }
                 @Html.ActionLink("Details", "Details", new { id = item.CourseId })
                 @if (User.IsInRole("Admin"))
-                { @:|
-                @Html.ActionLink("Delete", "Delete", new { id = item.CourseId })
+                {@:|
+                    if (!item.IsActive)
+                    {
+                        @Html.ActionLink("Reactivate", "Delete", new { id = item.CourseId })
+
+                    }
+                    else
+                    {
+                    @Html.ActionLink("Retired", "Delete", new { id = item.CourseId })
+                    }
                 }
             </td>
         </tr>

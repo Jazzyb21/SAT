@@ -61,9 +61,35 @@
                 @Html.DisplayFor(modelItem => item.ScheduledClassStatus.SCSName)
             </td>
             <td>
-                @if (User.IsInRole("Admin")) { 
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ScheduledClassId }) @:|
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ScheduledClassId })
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ScheduledClassId }) 
+                    if (item.SCSID != 1)
+                    {
+                        @:| @Html.ActionLink("Active", "Delete", new { id = item.ScheduledClassId, statusId = 1 })
+                    }
+
+                    if (item.SCSID != 2)
+                    {
+                        @:| @Html.ActionLink("Pending", "Delete", new { id = item.ScheduledClassId, statusId = 2 })
+
+                    }
+
+                    if (item.SCSID != 3)
+                    {
+                        @:| @Html.ActionLink("Completed", "Delete", new { id = item.ScheduledClassId, statusId = 3 })
+
+
+                    }
+
+                    if (item.SCSID != 4)
+                    {
+                        @:| @Html.ActionLink("Cancel", "Delete", new { id = item.ScheduledClassId, statusId = 4 })
+
+
+                    }
+
+
                 }
             </td>
         </tr>

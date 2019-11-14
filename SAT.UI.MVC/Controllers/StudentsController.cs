@@ -113,7 +113,25 @@ namespace SAT.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(student);
+
+            if (student.SSID == 2) //if student status is current
+            {
+                db.Students.Find(id).SSID = 3;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else if (student.SSID == 3) //if student is withdrawn
+            {
+                db.Students.Find(id).SSID = 2;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Edit", new { id = id });
+            }
+
+            //return View(student);
         }
 
         // POST: Students/Delete/5
@@ -123,9 +141,25 @@ namespace SAT.UI.MVC.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Student student = db.Students.Find(id);
-            db.Students.Remove(student);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (student.SSID == 2) //if student status is current
+            {
+                db.Students.Find(id).SSID = 3;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else if (student.SSID == 3) //if student is withdrawn
+            {
+                db.Students.Find(id).SSID = 2;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Edit", id);
+            }
+            ////db.Students.Remove(student);
+            //db.SaveChanges();
+            //return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
