@@ -11,30 +11,41 @@
             <div class="col-md-4 d-flex align-self-stretch ftco-animate text-center">
                 <div class="media block-6 services d-block">
                     <div class="icon d-flex justify-content-center align-items-center">
-                        <i class="fas fa-user fa-5x text-white"></i>
+                        <a href="@Url.Action("Index", "Students")">
+                            <i class="fas fa-user fa-5x text-white"></i>
+                        </a>
                     </div>
                     <div class="media-body p-2 mt-3">
-                        <h3 class="heading">Students</h3>
+                        <a href="@Url.Action("Index", "Students")">
+                            <h3 class="heading">Students</h3>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 d-flex align-self-stretch ftco-animate text-center">
                 <div class="media block-6 services d-block">
                     <div class="icon d-flex justify-content-center align-items-center">
-                        <i class="fas fa-running fa-5x text-white"></i>
+                        <a href="@Url.Action("Index", "Courses")"><i class="fas fa-running fa-5x text-white"></i></a>
                     </div>
                     <div class="media-body p-2 mt-3">
-                        <h3 class="heading">Classes</h3>
+
+                        <a href="@Url.Action("Index", "Courses")"><h3 class="heading">Courses</h3></a>
+
                     </div>
                 </div>
             </div>
             <div class="col-md-4 d-flex align-self-stretch ftco-animate text-center">
                 <div class="media block-6 services d-block">
                     <div class="icon d-flex justify-content-center align-items-center">
-                        <i class="fas fa-exclamation-triangle fa-5x text-white"></i>
+                        <a href="@Url.Action("Contact", "Home")">
+                            <i class="fas fa-exclamation-triangle fa-5x text-white"></i>
+                        </a>
                     </div>
-                    <div class="media-body p-2 mt-3">
-                        <h3 class="heading">Problem?</h3>
+                        <div class="media-body p-2 mt-3">
+                            <a href="@Url.Action("Contact", "Home")">
+                                <h3 class="heading">Problem?</h3>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -41,8 +41,23 @@
                     {
                         <li class="nav-item"><a href="@Url.Action("Index", "Students")" class="nav-link">Students</a></li>
                     }
-                    <li class="nav-item"><a href="#" class="nav-link">Courses</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Scheduled</a></li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item"><a href="@Url.Action("Index", "Courses")" class="nav-link">Courses</a></li>
+                    }
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item"><a href="@Url.Action("Index", "ScheduledClasses")" class="nav-link">Scheduled</a></li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item"><a href="@Url.Action("Index", "StudentStatusController")" class="nav-link">Student Statuses</a></li>
+                    }
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item"><a href="@Url.Action("Index", "Enrollments")" class="nav-link">Enrollments</a></li>
+
+                    }
                     <li class="nav-item"><a href="@Url.Action("Contact", "Home")" class="nav-link">Contact</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" title="Manage" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">

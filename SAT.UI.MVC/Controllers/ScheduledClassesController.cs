@@ -10,12 +10,13 @@ using SAT.DATA.EF;
 
 namespace SAT.UI.MVC.Controllers
 {
-    [Authorize(Roles = "Admin, Scheduler")]
+   
     public class ScheduledClassesController : Controller
     {
         private SATEntities db = new SATEntities();
 
         // GET: ScheduledClasses
+        [Authorize]
         public ActionResult Index()
         {
             var scheduledClasses = db.ScheduledClasses.Include(s => s.Cours).Include(s => s.ScheduledClassStatus);
@@ -23,6 +24,7 @@ namespace SAT.UI.MVC.Controllers
         }
 
         // GET: ScheduledClasses/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace SAT.UI.MVC.Controllers
         }
 
         // GET: ScheduledClasses/Create
+        [Authorize(Roles ="Admin")]
         public ActionResult Create()
         {
             ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "CourseName");
@@ -50,6 +53,7 @@ namespace SAT.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles ="Admin")]
         public ActionResult Create([Bind(Include = "ScheduledClassId,CourseId,StartDate,EndDate,InstructorName,Location,SCSID")] ScheduledClass scheduledClass)
         {
             if (ModelState.IsValid)
@@ -65,6 +69,7 @@ namespace SAT.UI.MVC.Controllers
         }
 
         // GET: ScheduledClasses/Edit/5
+        [Authorize(Roles ="Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,6 +91,7 @@ namespace SAT.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles ="Admin")]
         public ActionResult Edit([Bind(Include = "ScheduledClassId,CourseId,StartDate,EndDate,InstructorName,Location,SCSID")] ScheduledClass scheduledClass)
         {
             if (ModelState.IsValid)
@@ -100,6 +106,7 @@ namespace SAT.UI.MVC.Controllers
         }
 
         // GET: ScheduledClasses/Delete/5
+        [Authorize(Roles ="Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -117,6 +124,7 @@ namespace SAT.UI.MVC.Controllers
         // POST: ScheduledClasses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles ="Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             ScheduledClass scheduledClass = db.ScheduledClasses.Find(id);

@@ -46,7 +46,9 @@ namespace SAT.DATA.EF
     public class EnrollmentMetadata
     {
         //public int EnrollmentId { get; set; }
+        [Display(Name = "Name")]
         public int StudentId { get; set; }
+        [Display(Name = "Course")]
         public int ScheduledClassId { get; set; }
 
         [Required]
@@ -56,7 +58,15 @@ namespace SAT.DATA.EF
 
     }
     [MetadataType(typeof(EnrollmentMetadata))]
-    public partial class Enrollment { }
+    public partial class Enrollment
+    {
+        [Display(Name = "Course")]
+        public string CourseAndDate
+        {
+            get { return ScheduledClass.Cours.CourseName + " ( " + ScheduledClass.StartDate + " )"; }
+
+        }
+    }
     #endregion
 
     #region ScheduledClass
@@ -88,7 +98,15 @@ namespace SAT.DATA.EF
 
     }
     [MetadataType(typeof(ScheduledClassMetadata))]
-    public partial class ScheduledClass { }
+    public partial class ScheduledClass {
+
+        [Display(Name = "Course")]
+        public string CourseAndDate
+        {
+            get { return Cours.CourseName + " ( " + StartDate + " )"; }
+
+        }
+    }
 
     #endregion
 
