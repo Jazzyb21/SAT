@@ -2276,6 +2276,7 @@
     <Content Include="Content\fonts\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\fonts\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fonts\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\MartialArtSATDocumentation.pdf" />
     <None Include="packages.config" />
     <Content Include="Scripts\js\.DS_Store" />
     <Content Include="Views\Students\Create.cshtml" />
