@@ -21,6 +21,10 @@ namespace SAT.UI.MVC.Controllers
             return View(db.StudentStatuses.ToList());
         }
 
+        public ActionResult TiledIndex()
+        {
+            return View(db.StudentStatuses.ToList());
+        }
         // GET: StudentStatus/Details/5
         public ActionResult Details(int? id)
         {

@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SAT.DATA.EF;
+using PagedList;
+using PagedList.Mvc;
 
 namespace SAT.UI.MVC.Controllers
 {
@@ -16,11 +18,27 @@ namespace SAT.UI.MVC.Controllers
 
         // GET: Students
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(/*string searchString, string currentSearch, int page = 1*/)
         {
             var students = db.Students.Include(s => s.StudentStatus);
+            //if (searchString !=null)
+            //{
+            //    page = 1;
+            //}
+            //else
+            //{
+            //    searchString = currentSearch;
+            //}
+
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+
+            //}
+            //int pageNumber = 2;
             return View(students.ToList());
         }
+
+   
 
         // GET: Students/Details/5
         [Authorize]
@@ -52,10 +70,36 @@ namespace SAT.UI.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "StudentId,FirstName,LastName,Major,Address,City,State,ZipCode,Phone,Email,PhotoUrl,SSID")] Student student)
+        public ActionResult Create([Bind(Include = "StudentId,FirstName,LastName,Major,Address,City,State,ZipCode,Phone,Email,PhotoUrl,SSID")] Student student, HttpPostedFileBase profilePic)
         {
             if (ModelState.IsValid)
             {
+                #region Image Upload
+
+                string imgName = "default.jpg";
+
+                if (profilePic != null)
+                {
+                    string[] goodExts = { ".jpg", ".jpeg", ".gif", ".png" };
+
+                    string ext = imgName.Substring(imgName.LastIndexOf('.'));
+
+                    if (goodExts.Contains(ext.ToLower()))
+                    {
+                        imgName = Guid.NewGuid() + ext;
+
+                        profilePic.SaveAs(Server.MapPath("~/Content/images/" + imgName));
+                    }
+                    else
+                    {
+                        imgName = "default.jpg";
+                    }
+                }
+
+                student.PhotoUrl = imgName;
+
+
+                #endregion
                 db.Students.Add(student);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -88,10 +132,37 @@ namespace SAT.UI.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Include = "StudentId,FirstName,LastName,Major,Address,City,State,ZipCode,Phone,Email,PhotoUrl,SSID")] Student student)
+        public ActionResult Edit([Bind(Include = "StudentId,FirstName,LastName,Major,Address,City,State,ZipCode,Phone,Email,PhotoUrl,SSID")] Student student, HttpPostedFileBase profilePic)
         {
             if (ModelState.IsValid)
             {
+                #region Image Upload
+
+                string imgName = "default.jpg";
+
+                if (profilePic != null)
+                {
+                    string[] goodExts = { ".jpg", ".jpeg", ".gif", ".png" };
+
+                    string ext = imgName.Substring(imgName.LastIndexOf('.'));
+
+                    if (goodExts.Contains(ext.ToLower()))
+                    {
+                        imgName = Guid.NewGuid() + ext;
+
+                        profilePic.SaveAs(Server.MapPath("~/Content/images/" + imgName));
+                    }
+                    else
+                    {
+                        imgName = "default.jpg";
+                    }
+                }
+
+                student.PhotoUrl = imgName;
+
+
+                #endregion
+
                 db.Entry(student).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

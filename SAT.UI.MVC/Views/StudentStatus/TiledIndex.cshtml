@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SAT.DATA.EF.StudentStatus>
+
+@{
+    ViewBag.Title = "Student Status";
+}
+
+
+<h2 class="text-center mt-3">@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+    @Html.ActionLink("List", "Index")
+</p>
+
+@foreach (var item in Model)
+{
+
+    <div class="menus d-flex ftco-animate">
+        <div class="text">
+            <div class="d-flex">
+                <div class="one-half">
+                    <a href="@Url.Action("Edit", "StudentStatus", new { id = item.SSID})">
+                        <h3>@Html.DisplayFor(modelItem => item.SSName)</h3>
+                    </a>
+                </div>
+                <div class="one-forth ">
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SSID }, new { @class = "btn btn-default" })
+                </div>
+            </div>
+            <p>  @Html.DisplayFor(modelItem => item.SSDescription)</p>
+        </div>
+    </div>
+
+}
+
+

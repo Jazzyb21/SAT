@@ -13,86 +13,113 @@
         @Html.ActionLink("Create New", "Create")
     }
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Cours.CourseName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InstructorName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ScheduledClassStatus.SCSName)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table class="table data-table">
+    <thead>
         <tr>
-            <td>
-                <a href="@Url.Action("Details","ScheduledClasses", new { id = item.ScheduledClassId} )">
-                    @Html.DisplayFor(modelItem => item.Cours.CourseName)
-                </a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InstructorName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.ScheduledClassStatus.SCSName)
-            </td>
-            <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ScheduledClassId }) 
-                    if (item.SCSID != 1)
-                    {
-                        @:| @Html.ActionLink("Active", "Delete", new { id = item.ScheduledClassId, statusId = 1 })
-                    }
-
-                    if (item.SCSID != 2)
-                    {
-                        @:| @Html.ActionLink("Pending", "Delete", new { id = item.ScheduledClassId, statusId = 2 })
-
-                    }
-
-                    if (item.SCSID != 3)
-                    {
-                        @:| @Html.ActionLink("Completed", "Delete", new { id = item.ScheduledClassId, statusId = 3 })
-
-
-                    }
-
-                    if (item.SCSID != 4)
-                    {
-                        @:| @Html.ActionLink("Cancel", "Delete", new { id = item.ScheduledClassId, statusId = 4 })
-
-
-                    }
-
-
-                }
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Cours.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InstructorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduledClassStatus.SCSName)
+            </th>
+            <th></th>
         </tr>
-    }
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Details","ScheduledClasses", new { id = item.ScheduledClassId} )">
+                        @Html.DisplayFor(modelItem => item.Cours.CourseName)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InstructorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScheduledClassStatus.SCSName)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ScheduledClassId })
+                        if (item.SCSID != 1)
+                        {
+                            @:| @Html.ActionLink("Active", "Delete", new { id = item.ScheduledClassId, statusId = 1 })
+                        }
+
+                        if (item.SCSID != 2)
+                        {
+                            @:| @Html.ActionLink("Pending", "Delete", new { id = item.ScheduledClassId, statusId = 2 })
+
+
+
+
+                        }
+
+                        if (item.SCSID != 3)
+                        {
+                            @:| @Html.ActionLink("Completed", "Delete", new { id = item.ScheduledClassId, statusId = 3 })
+
+
+
+
+
+
+
+
+                        }
+
+                        if (item.SCSID != 4)
+                        {
+                            @:| @Html.ActionLink("Cancel", "Delete", new { id = item.ScheduledClassId, statusId = 4 })
+
+
+
+
+
+
+
+
+                        }
+
+
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('.data-table').DataTable();
+        });
+    </script>
+}

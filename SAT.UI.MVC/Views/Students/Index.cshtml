@@ -13,64 +13,72 @@
     </p>
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PhotoUrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StudentStatus.SSName)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table class="table data-table">
+    <thead>
         <tr>
-            <td>
-                <a href="@Url.Action("Details","Students", new { id = item.StudentId} )">
-                    <image class="img-thumbnail img-fluid" src="~/Content/images/@Html.DisplayFor(modelItem => item.PhotoUrl)"></image>
-                </a>
-            </td>
-            <td>
-                <a href="@Url.Action("Details","Students", new { id = item.StudentId} )">
-                    @Html.DisplayFor(modelItem => item.FullName)
-                </a>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.StudentStatus.SSName)
-            </td>
-            <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.StudentId })
-                    if (item.Enrollments.Where(p => p.StudentId == item.StudentId).ToList().Count() == 0)
-                    {
-                        @:| @Html.ActionLink("Delete", "Delete", new { id = item.StudentId })
-                    }
-                    else
-                    {
-                        @:| In Use
-                    }
-                }
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentStatus.SSName)
+            </th>
+            <th></th>
         </tr>
-    }
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Details","Students", new { id = item.StudentId} )">
+                        <image class="img-thumbnail img-fluid" src="~/Content/images/@Html.DisplayFor(modelItem => item.PhotoUrl)"></image>
+                    </a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Details","Students", new { id = item.StudentId} )">
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </a>
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentStatus.SSName)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.StudentId })
+                        if (item.Enrollments.Where(p => p.StudentId == item.StudentId).ToList().Count() == 0)
+                        {
+                            @:| @Html.ActionLink("Delete", "Delete", new { id = item.StudentId })
+                        }
+                        else
+                        {
+                            @:| In Use
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
 
-<script>
-    $("#message").show;
-</script>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('.data-table').DataTable();
+        });
+    </script>
+    }

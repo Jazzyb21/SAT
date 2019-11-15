@@ -1,39 +1,59 @@
 ﻿@model IEnumerable<SAT.DATA.EF.StudentStatus>
 
 @{
-    ViewBag.Title = "Index";
+
+
+    ViewBag.Title = "Student Status";
 }
 
-<h2>Index</h2>
+<h2 class="text-center mt-3">@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.SSName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SSDescription)
-        </th>
-        <th></th>
-    </tr>
+<p>
+    @Html.ActionLink("Tile", "TiledIndex")
+</p>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SSName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SSDescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SSID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SSID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SSID })
-        </td>
-    </tr>
+<table class="table data-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SSName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SSDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SSName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SSDescription)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.SSID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.SSID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SSID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('.data-table').DataTable();
+        });
+    </script>
 }
 
-</table>

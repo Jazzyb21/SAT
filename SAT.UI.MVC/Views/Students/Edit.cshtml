@@ -4,13 +4,15 @@
     ViewBag.Title = "Edit";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Students", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.StudentId)
+    @Html.HiddenFor(model => model.PhotoUrl)
 
     <div class="container-fluid" id="stuDetails">
         <div id="stuHeader" class="row form-group">
+
 
             <div class="col-md-6">
                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
@@ -62,9 +64,10 @@
                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control col-md-7" } })
                 </li>
                 <li class="form-group row">
-                    @Html.LabelFor(model => model.PhotoUrl, htmlAttributes: new { @class = "col-form-label col-md-4" })
-                    @Html.ValidationMessageFor(model => model.PhotoUrl, "", new { @class = "text-danger" })
-                    @Html.EditorFor(model => model.PhotoUrl, new { htmlAttributes = new { @class = "form-control col-md-7" } })
+                    @*@Html.LabelFor(model => model.PhotoUrl, htmlAttributes: new { @class = "col-form-label col-md-4" })
+        @Html.ValidationMessageFor(model => model.PhotoUrl, "", new { @class = "text-danger" })
+        @Html.EditorFor(model => model.PhotoUrl, new { htmlAttributes = new { @class = "form-control col-md-7" } })*@
+                    <input type="file" name="profilePic" />
                 </li>
                 <li class="form-group row">
                     @Html.LabelFor(model => model.SSID, "SSID", htmlAttributes: new { @class = "col-form-label col-md-4" })
