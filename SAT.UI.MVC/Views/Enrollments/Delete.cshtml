@@ -4,45 +4,46 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Enrollment</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.EnrollmentDate)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ScheduledClass.InstructorName)
-        </dt>
+<div class="container" id="stuDetails">
+    <div id="stuHeader"><h2>@ViewBag.Title</h2></div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ScheduledClass.InstructorName)
-        </dd>
+    <div id="stuContentRight">
+        <ul id="detailsList">
+            <li>
+                @Html.DisplayNameFor(model => model.EnrollmentDate): @Html.DisplayFor(model => model.EnrollmentDate)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.ScheduledClass.StartDate): @Html.DisplayFor(model => model.ScheduledClass.StartDate)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.CourseAndDate): @Html.DisplayFor(model => model.CourseAndDate)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.Student.FullName): @Html.DisplayFor(model => model.Student.FullName)
+            </li>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Student.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Student.FirstName)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
+        </ul>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div id="stuFooterLeft">
+
+            @Html.ActionLink("Back to Enrollments", "Index", null, new { @class="btn btn-primary"})
+
+
+
+        </div>
+        <div id="stuFooterRight">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+
         </div>
     }
+    <div class="clearfix"></div>
 </div>

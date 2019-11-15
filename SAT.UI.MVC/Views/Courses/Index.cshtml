@@ -5,17 +5,18 @@
 }
 
 <form action="@Url.Action("Index", "Courses")" method="get">
-    <div class="input-group">
-        <div class="input-group-prepend">
+    <div class="input-group row pt-md-2">
+        <div class="input-group-prepend col-md-2">
             <label class="input-group" for="toggleActiveStatus">Course Status</label>
         </div>
-        <select class="custom-select" name="isActive" id="toggleActiveStatus">
+        <select class="custom-select col-md-5" name="isActive" id="toggleActiveStatus">
             <option selected value="">All</option>
             <option value="true">Active</option>
             <option value="false">Retired</option>
         </select>
+        <input type="submit" value="Go" class="btn btn-primary col-md-1 ml-3" />
+
     </div>
-    <input type="submit" value="Go" class="btn btn-primary" />
 </form>
 @if (User.IsInRole("Admin"))
 {

@@ -1,69 +1,46 @@
 ﻿@model SAT.DATA.EF.Course
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details " + Model.CourseName;
 }
 
-<h2>Details</h2>
+<div class="container" id="stuDetails">
+    <div id="stuHeader"><h2>@ViewBag.Title</h2></div>
+ 
+    <div id="stuContentRight">
+        <ul id="detailsList">
+            <li>
+                @Html.DisplayNameFor(model => model.CourseName): @Html.DisplayFor(model => model.CourseName)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.CourseDescription): @Html.DisplayFor(model => model.CourseDescription)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.CreditHours): @Html.DisplayFor(model => model.CreditHours)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.Curriculum): @Html.DisplayFor(model => model.Curriculum)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.Notes): @Html.DisplayFor(model => model.Notes)
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => model.IsActive): @Html.DisplayFor(model => model.IsActive)
+            </li>
+        </ul>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+    <div id="stuFooterLeft">
+        @Html.ActionLink("Back to Courses", "Index", null, new { @class = "btn btn-success" })
 
-<div>
-    <h4>Course</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CourseName)
-        </dt>
+    </div>
+    <div id="stuFooterRight">
+        @if (User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.CourseId }, new { @class = "btn btn-danger" })
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.CourseName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CourseDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CourseDescription)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreditHours)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreditHours)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Curriculum)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Curriculum)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Notes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Notes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-    </dl>
+    </div>
+    <div class="clearfix"></div>
 </div>
-<p>
-    @if (User.IsInRole("Admin"))
-    {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.CourseId }) @:|
-    }
-    @Html.ActionLink("Back to List", "Index")
-</p>

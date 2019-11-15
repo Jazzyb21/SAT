@@ -35,6 +35,7 @@
             <li>
                 @Html.DisplayFor(model => model.StudentStatus.SSName): @Html.DisplayFor(model => model.StudentStatus.SSDescription)
             </li>
+            @Html.ActionLink("Enroll in Class", "Create", "Enrollments", null, new { @class = "btn btn-success" })
         </ul>
     </div>
     <div class="clearfix"></div>

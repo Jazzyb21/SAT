@@ -1,55 +1,53 @@
 ﻿@model SAT.DATA.EF.Enrollment
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Enroll Student";
 }
 
-<h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Enrollment</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.StudentId, "StudentId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("StudentId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.StudentId, "", new { @class = "text-danger" })
-            </div>
+
+
+
+    <div class="container-fluid" id="stuDetails">
+        <h2 class="text-center">@ViewBag.Title</h2>
+        <div id="stuEditContent">
+            <ul>
+                <li class="form-group row">
+                    @Html.LabelFor(model => model.StudentId, htmlAttributes: new { @class = "col-form-label col-md-4" })
+                    @Html.DropDownList("StudentId", null, htmlAttributes: new { @class = "form-control col-md-7" })
+                </li>
+
+                <li class="form-group row">
+                    @Html.LabelFor(model => model.ScheduledClassId, htmlAttributes: new { @class = "col-form-label col-md-4" })
+                    @Html.DropDownList("ScheduledClassId", null, htmlAttributes: new { @class = "form-control col-md-7" })
+                </li>
+                <li class="form-group row">
+                    @Html.LabelFor(model => model.EnrollmentDate, htmlAttributes: new { @class = "col-form-label col-md-4" })
+                    @Html.EditorFor(model => model.EnrollmentDate, new { htmlAttributes = new { @class = "form-control col-md-7" } })
+                    @Html.ValidationMessageFor(model => model.EnrollmentDate, "", new { @class = "text-danger" })
+                </li>
+            </ul>
+
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ScheduledClassId, "ScheduledClassId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ScheduledClassId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ScheduledClassId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <div class="clearfix"></div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EnrollmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EnrollmentDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EnrollmentDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+        <div id="stuFooterRight">
+            <input type="submit" value="Save" class="btn btn-success" />
         </div>
+        <div id="stuFooterLeft">
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+        <div class="clearfix"></div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

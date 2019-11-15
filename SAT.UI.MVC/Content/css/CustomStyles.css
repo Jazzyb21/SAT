@@ -3,7 +3,7 @@
    position: relative;
 }
 #main{
-    min-height: 60vh;
+    min-height: 70vh;
     overflow: hidden;
     display: block;
     position: relative;
@@ -101,4 +101,13 @@ footer{
     border: solid 1px black;
     padding: 1em;
     text-align: left;
+}
+
+
+th#pic {
+    width: 15%;
+}
+
+.form-group.row img{
+    max-height: 300px;
 }
